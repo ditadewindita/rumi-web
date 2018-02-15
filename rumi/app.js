@@ -5,10 +5,24 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// User Auth
+//Adding stuff here. Hope it works
+var mongoose = require('mongoose');
+//End of stuff added
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+
+//1234
+var uri = 'mongodb://RUMI:RUMI@rumi-shard-00-00-tyo4r.mongodb.net:27017,rumi-shard-00-01-tyo4r.mongodb.net:27017,rumi-shard-00-02-tyo4r.mongodb.net:27017/admin?replicaSet=RUMI-shard-0&ssl=true';
+
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk(uri);
+//1234
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +39,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+
+// Database
+mongoose.connect(uri);
+// Database
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
