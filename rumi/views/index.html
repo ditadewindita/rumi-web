@@ -1,0 +1,63 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+</script>
+
+<body>
+
+<h1></h1>
+<p>Welcome to HTML!</p>
+
+<!--  Ajax working with my event listener function below -->
+<button type="button" onclick="getData()"> Press to Retrieve data</button>
+<p id="demo"> My Ajax Example</p>
+
+
+<!-- Angular JS working to load a part of the page asynchronously -->
+<div ng-app="">
+	<p> Input: <input type = "text" ng-model="output"></p>
+	<p> The {{output}} is a lie.</p>
+</div>
+
+<button type="button" onclick="goToErrorPage()" > Reload this page</button>
+
+<script>
+
+function goToErrorPage()
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+	
+		if(this.readyState == 4 && this.status == 200)
+		{			
+			document.getElementById("demo").innerHTML = this.responseText;
+		}
+	};
+	// To load a page, go into app.js, use app.use('pageName', routerName.js)
+	// Then call this command and replace users with pageName
+	xhttp.open("GET", "users" , true);
+	xhttp.send();
+}
+	
+function getData() 
+{
+	// Always use this to initiate GET or POST
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+		// Checks if everything is ready
+	    if (this.readyState == 4 && this.status == 200)
+		document.getElementById("demo").innerHTML = this.responseText;
+	};
+	
+	xhttp.open("GET", "Yeet.txt", true);
+	xhttp.send();
+}
+</script>
+
+<!--<input type="button" onclick="location.href='/routes/error.html';" value="Click Me to get an Error :D" /> -->
+
+
+
+</body>
+</html>
