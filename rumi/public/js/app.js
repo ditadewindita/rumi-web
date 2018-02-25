@@ -12,7 +12,12 @@ app.factory('UserService', function($http) {
 
     // call to POST and create a new user
     create : function(userData) {
-      return $http.post('/api/users', userData);
+      return $http.post('/api/createUser', userData);
+    },
+
+    // call to POST and login a user
+    login : function(userData) {
+      return $http.post('/api/loginUser', userData);
     },
 
     // call to DELETE a user
@@ -44,30 +49,59 @@ app.controller('UserController', function($scope, UserService) {
       'password' : ''
     };
 
-    // Create the user only if the inputs are valid!
-    if($scope.user) {
-      $scope.createUser = function(user) {
+    $scope.userLogin = {
+      'username' : '',
+      'password' : ''
+    };
 
+    if($scope.userLogin) {
+      $scope.logUser = function(userLogin) {
         // Call the user creation function in the service and gather the response.
         // I have lots of superfluous data gathering on success/error but whatevs
-        UserService.create($scope.user).then(function onSuccess(response) {
-        // Handle success
-        var data = response.data;
-        var status = response.status;
-        var statusText = response.statusText;
-        var headers = response.headers;
-        var config = response.config;
-        $scope.output = data;
+          UserService.login($scope.userLogin).then(function onSuccess(response) {
+          // Handle success
+          var data = response.data;
+          var status = response.status;
+          var statusText = response.statusText;
+          var headers = response.headers;
+          var config = response.config;
+          $scope.output = data;
 
-      }).catch(function onError(response) {
-        // Handle error
-        var data = response.data;
-        var status = response.status;
-        var statusText = response.statusText;
-        var headers = response.headers;
-        var config = response.config;
-        $scope.output = data;
-      });
-    };
-  }
+        }).catch(function onError(response) {
+          // Handle error
+          var data = response.data;
+          var status = response.status;
+          var statusText = response.statusText;
+          var headers = response.headers;
+          var config = response.config;
+          $scope.output = data;
+        });
+      };
+    }
+  //   // Create the user only if the inputs are valid!
+  //   if($scope.user) {
+  //     $scope.createUser = function(user) {
+  //
+  //       // Call the user creation function in the service and gather the response.
+  //       // I have lots of superfluous data gathering on success/error but whatevs
+  //       UserService.create($scope.user).then(function onSuccess(response) {
+  //       // Handle success
+  //       var data = response.data;
+  //       var status = response.status;
+  //       var statusText = response.statusText;
+  //       var headers = response.headers;
+  //       var config = response.config;
+  //       $scope.output = data;
+  //
+  //     }).catch(function onError(response) {
+  //       // Handle error
+  //       var data = response.data;
+  //       var status = response.status;
+  //       var statusText = response.statusText;
+  //       var headers = response.headers;
+  //       var config = response.config;
+  //       $scope.output = data;
+  //     });
+  //   };
+  // }
 });

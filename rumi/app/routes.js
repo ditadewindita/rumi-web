@@ -1,32 +1,67 @@
-// grab the user model we just created
+var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcrypt');
 var User = require('./models/user');
 
-    module.exports = function(app) {
+module.exports = function(app) {
 
-        // server routes ===========================================================
-        // handle things like api calls
-        // authentication routes
+    // server routes ===========================================================
+    // handle things like api calls
+    // authentication routes
 
-        // sample api route
-        app.post('/api/users', function(req, res) {
-          console.log("Received from front-end: " + JSON.stringify(req.body));
+    // sample api route
+    app.post('/api/createUser', function(req, res) {
+      console.log("Received from front-end: " + JSON.stringify(req.body));
 
-          // use mongoose to create the user in the database
-          User.create(req.body, function(err, user){
-            if(err)
-              res.send(err);
-            else
-              return res.json(user);
-          });
-        });
+      var newUser = new User(req.body);
+      newUser.password = bcrypt.hashSync(req.body.password, 10);
 
-        // route to handle creating goes here (app.post)
-        // route to handle delete goes here (app.delete)
+      newUser.save(function(err, user) {
+        if(err) {
+          res.send(err);
+        }
+        else {
+          user.password = undefined;
+          console.log("Created user!");
+          return res.json(user);
+        }
+      });
+    });
 
-        // frontend routes =========================================================
-        // route to handle all angular requests
-        app.get('*', function(req, res) {
-            res.sendfile('./public/views/index.html'); // load our public/index.html file
-        });
+    app.post('/api/loginUser', function(req, res) {
+      console.log("Calling user login....with: " + JSON.stringify(req.body));
 
-    };
+      User.findOne({username : req.body.username}, function(err, user) {
+        if(err)
+          throw err;
+        if(!user) {
+          res.status(401).json({ message : 'Authentication failed. User not found.'});
+        }
+        else if(user) {
+          if(user.comparePassword(req.body.password)) {
+            res.status(401).json({ message : 'Authentication failed. Password incorrect.'});
+          }
+          else {
+            console.log("User logged in!");
+
+            return res.json({ token : jwt.sign({
+              _id : user._id,
+              firstName : user.firstName,
+              lastName : user.lastName,
+              email : user.email,
+              username : user.username }, 'SUPERSECRETKEYOMG')});
+          }
+        }
+      })
+    })
+
+    // route to handle creating goes here (app.post)
+    // route to handle delete goes here (app.delete)
+
+    // frontend routes =========================================================
+    // route to handle all angular requests
+    app.get('*', function(req, res) {
+        res.sendfile('./public/views/index.html'); // load our public/index.html file
+    });
+
+};

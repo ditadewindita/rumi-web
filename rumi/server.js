@@ -18,6 +18,9 @@ var port = process.env.PORT || 8080;
 // config data
 var db = require('./config/db');
 
+var User = require('./app/models/user'),
+jsonwebtoken = require("jsonwebtoken");
+
 // connet to mongoDB
 mongoose.connect(db.url);
 
@@ -52,6 +55,23 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 // routes
 require('./app/routes')(app); // configure our routes
+
+app.use(function(req, res, next) {
+  if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
+    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'SUPERSECRETKEYOMG', function(err, decode) {
+      if(err)
+        req.user = undefined;
+      else {
+        req.user = decode;
+        console.log("Encoded!");
+      }
+    });
+  }
+  else {
+    req.user = undefined;
+    console.log("Not correct header");
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
