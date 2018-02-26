@@ -12,7 +12,7 @@ var UserSchema = new Schema({
 });
 
 UserSchema.methods.comparePassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
+  return bcrypt.compareSync(password, bcrypt.hashSync(this.password, 10));
 };
 
 // module.exports allows us to pass this to other files when it is called
