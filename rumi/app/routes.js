@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var User = require('./models/user');
+var path = require('path');
 
 module.exports = function(app) {
 
@@ -60,8 +61,16 @@ module.exports = function(app) {
 
     // frontend routes =========================================================
     // route to handle all angular requests
-    app.get('*', function(req, res) {
-        res.sendfile('./public/views/index.html'); // load our public/index.html file
+    app.get('/', function(req, res) {
+        res.sendFile(path.resolve(__dirname, '../public') + '/views/index.html');
+    });
+
+    app.get('/login', function(req, res) {
+        res.sendFile(path.resolve(__dirname, '../public') + '/views/login.html');
+    });
+
+    app.get('/register', function(req, res) {
+        res.sendFile(path.resolve(__dirname, '../public') + '/views/register.html');
     });
 
 };

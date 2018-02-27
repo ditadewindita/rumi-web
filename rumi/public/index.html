@@ -21,7 +21,7 @@
     <script src="/js/appRoutes.js"></script>
     <script src="/js/app.js"></script>
 </head>
-<body ng-app="Rumi" ng-controller="UserController">
+<body ng-app="Rumi" ng-controller="RegisterController">
   <div class="container">
 
       <!-- HEADER -->
@@ -32,9 +32,11 @@
 
           <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
           <ul class="nav navbar-nav">
-              <li><a href="/users">Users</a></li>
+              <li><a href="/login">Login</a></li>
           </ul>
       </nav>
+
+      <h>Welcome to Rumi!</h>
 
       <!-- ANGULAR DYNAMIC CONTENT -->
       <div ng-view></div>
