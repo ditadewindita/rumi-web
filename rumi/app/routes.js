@@ -12,6 +12,7 @@ module.exports = function(app) {
 
     // sample api route
     app.post('/api/createUser', function(req, res) {
+      Console.log("hello");
       var newUser = new User(req.body);
       newUser.password = bcrypt.hashSync(req.body.password, 10);
 
@@ -27,6 +28,7 @@ module.exports = function(app) {
     });
 
     app.post('/api/loginUser', function(req, res) {
+      Console.log("hello");
       User.findOne({ username : req.body.username }, function(err, user) {
         if(err)
           throw err;

@@ -5,10 +5,6 @@ var app = angular.module("Rumi", ['ngRoute', 'appRoutes']);
 app.factory('UserService', function($http) {
 
   return {
-    isLogged: false,
-
-    username: '',
-
     // call to GET all users
     get : function() {
       return $http.get('/api/users');
@@ -31,16 +27,8 @@ app.factory('UserService', function($http) {
   }
 });
 
-// Controllers
-app.controller('MainController', function($scope) {
 
-    $scope.tagline = 'I love chicken!';
-
-});
-
-
-app.controller('LoginController', ['$scope', '$http', '$location', 'UserService',
-  function($scope, $http, $location, User) {
+app.controller('LoginController', function($scope, UserService) {
     $scope.user = {
       'username' : '',
       'password' : ''
@@ -57,10 +45,6 @@ app.controller('LoginController', ['$scope', '$http', '$location', 'UserService'
           var statusText = response.statusText;
           var headers = response.headers;
           var config = response.config;
-          // successful login -> isLogged is true and set username
-          User.isLogged = true;
-          User.username = data.username;
-          $location.path('/dashboard');
         }).catch(function onError(response) {
           // Handle error
           var data = response.data;
@@ -69,13 +53,10 @@ app.controller('LoginController', ['$scope', '$http', '$location', 'UserService'
           var headers = response.headers;
           var config = response.config;
           $scope.output = data;
-          // unsuccessful login -> isLogged is false, username is empty
-          User.isLogged = false;
-          User.username = '';
         });
       };
     }
-}]);
+});
 
 app.controller('RegisterController', function($scope, UserService) {
 
@@ -118,22 +99,4 @@ app.controller('RegisterController', function($scope, UserService) {
 
 app.controller('DashboardController', function($scope, UserService) {
 
-});
-
-app.run(function($location, $rootScope) {
-  var postLoginRoute;
-
-  $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
-    // if user is trying to access page where login is required but user is
-    // logged out, redirect to login
-    if (nextRoute.loginRequired && Account.loggedOut()) {
-      postLoginRoute = $location.path();
-      $location.path('/login').replace();
-    }
-    // if user is logged in, redirect to the post login route
-    else if (postLogInRoute && Account.loggedIn()) {
-      $location.path(postLogInRoute).replace();
-      postLogInRoute = null;
-    }
-  });
 });
