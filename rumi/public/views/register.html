@@ -1,9 +1,8 @@
 <div class="jumbotron text-center">
-    <h1>User Management</h1>
+    <h1>Welcome to Rumi!</h1>
 
-    <p>{{ tagline }}</p>
+    <p>Fill out the fields below to get started.</p>
 
-    <div ng-show=
     <form name="registerUserForm">
       <input type="text" placeholder="First Name" ng-model="user.firstName">
       <input type="text" placeholder="Last Name" ng-model="user.lastName">
@@ -13,11 +12,5 @@
       <button id="registerSubmit" ng-click="createUser(user)">Sign up!</button>
     </form>
 
-    <form name="loginUserForm">
-      <input type="text" placeholder="Username" ng-model="userLogin.username">
-      <input type="password" placeholder="Password" ng-model="userLogin.password">
-      <button id="loginSubmit" ng-click="logUser(userLogin)">Login!</button>
-    </form>
-
-    <p>{{ output }}</p>
+    Already have an account? <a href="/login">Log in here.</a>
 </div>

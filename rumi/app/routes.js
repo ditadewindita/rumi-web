@@ -12,8 +12,6 @@ module.exports = function(app) {
 
     // sample api route
     app.post('/api/createUser', function(req, res) {
-      console.log("Received from front-end: " + JSON.stringify(req.body));
-
       var newUser = new User(req.body);
       newUser.password = bcrypt.hashSync(req.body.password, 10);
 
@@ -23,28 +21,23 @@ module.exports = function(app) {
         }
         else {
           user.password = undefined;
-          console.log("Created user!");
           return res.json(user);
         }
       });
     });
 
     app.post('/api/loginUser', function(req, res) {
-      console.log("Calling user login....with: " + JSON.stringify(req.body));
-
-      User.findOne({username : req.body.username}, function(err, user) {
+      User.findOne({ username : req.body.username }, function(err, user) {
         if(err)
           throw err;
         if(!user) {
           res.status(401).json({ message : 'Authentication failed. User not found.'});
         }
         else if(user) {
-          if(user.comparePassword(req.body.password)) {
+          if(!user.comparePassword(req.body.password)) {
             res.status(401).json({ message : 'Authentication failed. Password incorrect.'});
           }
           else {
-            console.log("User logged in!");
-
             return res.json({ token : jwt.sign({
               _id : user._id,
               firstName : user.firstName,
@@ -53,8 +46,8 @@ module.exports = function(app) {
               username : user.username }, 'SUPERSECRETKEYOMG')});
           }
         }
-      })
-    })
+      });
+    });
 
     // route to handle creating goes here (app.post)
     // route to handle delete goes here (app.delete)
