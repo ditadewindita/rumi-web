@@ -1,0 +1,13 @@
+<div class="jumbotron text-center">
+    <h1>Welcome back to Rumi!</h1>
+
+    <p>Enter your login information below.</p>
+
+    <form name="loginUserForm">
+      <input type="text" placeholder="Username" ng-model="user.username">
+      <input type="password" placeholder="Password" ng-model="user.password">
+      <button id="loginSubmit" ng-click="logUser(user)">Login</button>
+    </form>
+
+    Don't have an account yet? <a href="/register">Register here!</a>
+</div>

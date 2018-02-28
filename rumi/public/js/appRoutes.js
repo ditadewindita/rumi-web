@@ -1,34 +1,29 @@
 angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider
-        // home page (can be accessed by non-registered users)
+        // home page
         .when('/', {
-            templateUrl: 'views/index.html',
-            controller: 'RegisterController'
+            templateUrl: '../modules/home/main.html',
+            resolve: resolveController('../modules/home/home.js')
         })
 
-        // login page that will use Login Controller
+        // login page
         .when('/login', {
-            templateUrl: 'views/login.html',
-            controller: 'LoginController'
+            templateUrl: '../modules/login/main.html',
+            resolve: resolveController('../modules/login/login.js')
         })
 
-        // register page that will use Register Controller
+        // register page
         .when('/register', {
-          templateUrl: 'views/register.html'
-          controller: 'RegisterController'
+            templateUrl: '../modules/register/main.html',
+            resolve: resolveController('../modules/register/register.js')
         })
 
-        // dashboard (user home) page that will use Dashboard Controller,
-        // user must be signed in to access
+        // dashboard page (for users that are signed in)
         .when('/dashboard', {
-          templateUrl: 'views/dashboard.html',
-          controller: 'DashboardController',
-          loginRequired: true
-        })
-
-        // redirect to home page if none of the above cases apply
-        .otherwise({redirectTo: '/'})
+            templateUrl: '../modules/dashboard/main.html',
+            resolve: resolveController('../modules/dashboard/dashboard.js')
+        });
 
     $locationProvider.html5Mode(true);
 
