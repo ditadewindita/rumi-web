@@ -1,4 +1,70 @@
-<div class="jumbotron text-center">
+<!DOCTYPE>
+<html>
+
+<head>
+  <title>Rumi</title>
+  <!-- the style here will be moved into style.css in stylesheets folder, it's here for testing developing process :D -->
+  <style>
+      button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 230px;
+      }
+  </style>
+</head>
+
+<body>
+
+<div class="jumbotron text-center" align="center">
+    <div class="imgcontainer">
+        <img src="rumi logo.png" alt="logo"  style="width:60px;">
+    </div>
+  <!-- <img src="rumi logo.png" alt="logo" style="width:60px;"> -->
+  <h1>Welcome to Rumi!</h1>
+  <p>Fill out the fields below to get started.</p>
+  <hr>
+  <form name="registerUserForm">
+      <table>
+       <tr>
+        <td>First Name:</td>
+        <td><input type="text" placeholder="*Enter First Name" ng-model="user.firstName"></td>
+       </tr>
+
+       <tr>
+        <td>Last Name:</td>
+        <td><input type="text" placeholder="*Enter Last Name" ng-model="user.lastName"></td>
+       </tr>
+
+       <tr>
+          <td>Email:</td>
+          <td><input type="email" placeholder="*Enter Email" ng-model="user.email"></td>
+       </tr>
+
+       <tr>
+          <td>Username:</td>
+          <td><input type="text" placeholder="*Enter Username" ng-model="user.username"></td>
+       </tr>
+
+       <tr>
+          <td>Password:</td>
+          <td><input type="password" placeholder="*Enter Password" ng-model="user.password"></td>
+       </tr>
+      </table>
+
+      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <button id="registerSubmit" ng-click="createUser(user)">Create an account</button><br>
+
+      Already have an account? <a href="/login">Log in here.</a>
+
+    </form>
+
+
+<!-- <div class="jumbotron text-center">
     <h1>Welcome to Rumi!</h1>
 
     <p>Fill out the fields below to get started.</p>
@@ -13,4 +79,9 @@
     </form>
 
     Already have an account? <a href="/login">Log in here.</a>
-</div>
+</div> -->
+
+
+</body>
+
+</html>
