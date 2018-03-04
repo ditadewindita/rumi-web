@@ -1,13 +1,77 @@
-<div class="jumbotron text-center">
-    <h1>Welcome back to Rumi!</h1>
+<!DOCTYPE>
+<html>
 
+<head>
+  <title>Rumi</title>
+  <!-- the style here will be moved into style.css in stylesheets folder, it's here for testing developing process :D -->
+  <style>
+      button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 230px;
+      }
+  </style>
+</head>
+
+<body>
+  <div class="jumbotron text-center" align="center">
+      <div class="imgcontainer">
+          <img src="rumi logo.png" alt="logo"  style="width:60px;">
+      </div>
+    <!-- <img src="rumi logo.png" alt="logo" style="width:60px;"> -->
+    <h1>Welcome back to us!</h1>
     <p>Enter your login information below.</p>
 
     <form name="loginUserForm">
-      <input type="text" placeholder="Username" ng-model="user.username">
-      <input type="password" placeholder="Password" ng-model="user.password">
-      <button id="loginSubmit" ng-click="logUser(user)">Login</button>
-    </form>
+        <table>
+         <tr>
+          <td>Username:</td>
+          <td><input type="text" placeholder="*Enter Username" ng-model="user.username"></td>
+         </tr>
+         <tr>
+          <td>Password:</td>
+          <td><input type="password" placeholder="*Enter Password" ng-model="user.password"></td>
+         </tr>
+        </table>
+        <br>
+        <button class="btn btn-primary btn-block"  id="loginSubmit"  ng-click="logUser(user)">Login</button><br><br>
+        Don't have an account yet? <a href="/register">Register here!</a>
 
-    Don't have an account yet? <a href="/register">Register here!</a>
-</div>
+    </form>
+  </div>
+
+<!-- to be deleted, I left it here for reference if I missed something -->
+<!-- <div align="center">
+  <div class="jumbotron text-center">
+      <h1>Welcome back to Rumi!</h1>
+
+      <p>Enter your login information below.</p>
+
+        <div class="auth-form-body mt-3" >
+          <form name="loginUserForm">
+              <div class="form-group">
+                <label><b>Username:</b></label>
+                <input type="text" placeholder="*Enter Username" ng-model="user.username">
+              </div>
+              <br>
+              <div class="form-group">
+                <label><b>Password:&nbsp;</b>  </label>
+                <input type="password" placeholder="*Enter Password" ng-model="user.password">
+              </div>
+              <br>
+            <button class="btn btn-primary btn-block"  id="loginSubmit"  ng-click="logUser(user)">Login</button>
+          </form>
+
+          Don't have an account yet? <a href="/register">Register here!</a>
+      </div>
+
+  </div>
+</div> -->
+
+</body>
+
+</html>
