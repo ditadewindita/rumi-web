@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var path = require('path');
 // var favicon = require('serve-favicon');
-// var logger = require('morgan');
+var logger = require('morgan');
 // var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 // var index = require('./routes/index');
@@ -48,7 +48,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(methodOverride('X-HTTP-Method-Override'));
 
-// app.use(logger('dev'));
+// Enable logging of all requests
+app.use(logger('dev'));
 // app.use(cookieParser());
 // app.use('/', index);
 // app.use('/users', users);
