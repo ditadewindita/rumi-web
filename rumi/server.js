@@ -57,22 +57,22 @@ app.use(logger('dev'));
 // routes
 require('./app/routes')(app); // configure our routes
 
-app.use(function(req, res, next) {
-  if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
-    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'SUPERSECRETKEYOMG', function(err, decode) {
-      if(err)
-        req.user = undefined;
-      else {
-        req.user = decode;
-        console.log("Encoded!");
-      }
-    });
-  }
-  else {
-    req.user = undefined;
-    console.log("Not correct header");
-  }
-});
+// app.use(function(req, res, next) {
+//   if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
+//     jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'SUPERSECRETKEYOMG', function(err, decode) {
+//       if(err)
+//         req.user = undefined;
+//       else {
+//         req.user = decode;
+//         console.log("Encoded!");
+//       }
+//     });
+//   }
+//   else {
+//     req.user = undefined;
+//     console.log("Not correct header");
+//   }
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -91,7 +91,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error.html');
+  res.render('./public/error');
 
 });
 

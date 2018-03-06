@@ -4,13 +4,11 @@ login.config(function($stateProvider) {
   $stateProvider
     .state('main', {
       name: 'main',
-      templateUrl: "main.html"
+      templateUrl: "main.html",
     })
 });
 
-login.controller('LoginController', [$state, $scope, 'UserService', function($state, $scope, UserService) {
-    $state.go('main');
-
+login.controller('LoginController', ['$state', '$scope', '$http', 'UserService', function($state, $scope, UserService) {
     $scope.user = {
       'username' : '',
       'password' : ''
@@ -28,6 +26,7 @@ login.controller('LoginController', [$state, $scope, 'UserService', function($st
           var statusText = response.statusText;
           var headers = response.headers;
           var config = response.config;
+          $scope.output = data;
           window.location.href = '../home/home.html';
         }).catch(function onError(response) {
           // Handle error
@@ -40,4 +39,6 @@ login.controller('LoginController', [$state, $scope, 'UserService', function($st
         });
       };
     }
+
+    $state.go('main');
 }]);

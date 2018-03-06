@@ -3,8 +3,8 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     $routeProvider
         // home page
         .when('/', {
-            templateUrl: '../modules/home/main.html',
-            resolve: resolveController('../modules/home/home.js')
+            templateUrl: '../index.html',
+            // resolve: resolveController('../modules/home/home.js')
         })
 
         // login page

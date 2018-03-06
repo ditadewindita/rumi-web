@@ -12,7 +12,7 @@ module.exports = function(app) {
 
     // sample api route
     app.post('/api/createUser', function(req, res) {
-      Console.log("attempting to create user...");
+      console.log("attempting to create user...");
       var newUser = new User(req.body);
       newUser.password = bcrypt.hashSync(req.body.password, 10);
 
@@ -28,7 +28,7 @@ module.exports = function(app) {
     });
 
     app.post('/api/loginUser', function(req, res) {
-      Console.log("attempting to login user...");
+      console.log("attempting to login user...");
       User.findOne({ username : req.body.username }, function(err, user) {
         if(err)
           throw err;
@@ -57,15 +57,15 @@ module.exports = function(app) {
     // frontend routes =========================================================
     // route to handle all angular requests
     app.get('/', function(req, res) {
-        res.sendFile(path.resolve(__dirname, '../public') + '/modules/home/main.html');
+        res.sendFile(path.resolve(__dirname, '../public') + '/index.html');
     });
 
     app.get('/login', function(req, res) {
-        res.sendFile(path.resolve(__dirname, '../public') + '/modules/login/main.html');
+        res.sendFile(path.resolve(__dirname, '../public') + '/modules/login/views/main.html');
     });
 
     app.get('/register', function(req, res) {
-        res.sendFile(path.resolve(__dirname, '../public') + '/modules/register/main.html');
+        res.sendFile(path.resolve(__dirname, '../public') + '/modules/register/views/main.html');
     });
 
 };

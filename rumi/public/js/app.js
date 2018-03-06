@@ -17,7 +17,7 @@ app.factory('UserService', function($http) {
 
     // call to POST and login a user
     login : function(user) {
-      Console.log("In login user");
+      console.log("In login user");
       return $http.post('/api/loginUser', user);
     },
 

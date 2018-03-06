@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="login">
+<html lang="en" ng-app="home">
   <head>
       <meta charset="UTF-8">
-      <!-- CSS -->
-      <link rel="stylesheet" href="../../js/libs/bootstrap/dist/css/bootstrap.min.css">
+
+
       <!-- JS -->
       <script src="../../js/libs/angular/angular.min.js"></script>
       <script src="../../js/libs/angular-route/angular-route.min.js"></script>
@@ -13,16 +13,16 @@
       <!-- <script src="/js/controllers/MainCtrl.js"></script>
       <script src="/js/controllers/UserCtrl.js"></script>
       <script src="/js/services/UserService.js"></script> -->
-      <!-- <script src="/js/appRoutes.js"></script> -->
+      <script src="/js/appRoutes.js"></script>
       <script src="../../js/app.js"></script>
-      <script src="login.js"></script>
+      <script src="home.js"></script>
   </head>
-  <body>
-    <div>
-      <div ng-controller="LoginController">
-        <div ui-view>
-        </div>
+<body>
+  <div class="container">
+    <div ng-controller="HomeController">
+      <div ui-view>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
