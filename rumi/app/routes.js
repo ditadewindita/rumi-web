@@ -12,32 +12,53 @@ module.exports = function(app) {
 
     // sample api route
     app.post('/api/createUser', function(req, res) {
-      console.log("attempting to create user...");
-      var newUser = new User(req.body);
-      newUser.password = bcrypt.hashSync(req.body.password, 10);
+      console.log("Attempting to create user...");
 
-      newUser.save(function(err, user) {
-        if(err) {
-          res.send(err);
+      User.findOne({ email: req.body.email }, function(err, user){
+        // If user email already exists
+        if (user) {
+          res.status(401).json({ code : 1, message : 'Account with that email already exists.' });
         }
         else {
-          user.password = undefined;
-          return res.json(user);
+          User.findOne({ username : req.body.username }, function(err, user){
+            // If username already exists
+            if(user) {
+              res.status(401).json({ code : 2, message : 'Account with that username already exists.' });
+            }
+            else {
+              // Create user
+              var newUser = new User(req.body);
+              // Hash password
+              newUser.password = bcrypt.hashSync(req.body.password, 10);
+
+              // Save user
+              newUser.save(function(err, user) {
+                if(err) {
+                  res.send(err);
+                }
+                else {
+                  user.password = undefined;
+                  return res.json(user);
+                }
+              });
+            }
+          });
         }
       });
     });
 
     app.post('/api/loginUser', function(req, res) {
-      console.log("attempting to login user...");
+      console.log("Attempting to login user...");
+
       User.findOne({ username : req.body.username }, function(err, user) {
         if(err)
           throw err;
         if(!user) {
-          res.status(401).json({ message : 'Authentication failed. User not found.'});
+          res.status(401).json({ code : 1, message : 'Authentication failed. User not found.'});
         }
         else if(user) {
           if(!user.comparePassword(req.body.password)) {
-            res.status(401).json({ message : 'Authentication failed. Password incorrect.'});
+            res.status(401).json({ code : 2, message : 'Authentication failed. Password incorrect.'});
           }
           else {
             return res.json({ token : jwt.sign({
@@ -56,16 +77,12 @@ module.exports = function(app) {
 
     // frontend routes =========================================================
     // route to handle all angular requests
+    app.get('/dashboard', function(req, res) {
+      res.sendFile(path.resolve(__dirname, '../public') + '/views/dashboard/index.html')
+    });
+
     app.get('/', function(req, res) {
-        res.sendFile(path.resolve(__dirname, '../public') + '/index.html');
-    });
-
-    app.get('/login', function(req, res) {
-        res.sendFile(path.resolve(__dirname, '../public') + '/modules/login/views/main.html');
-    });
-
-    app.get('/register', function(req, res) {
-        res.sendFile(path.resolve(__dirname, '../public') + '/modules/register/views/main.html');
+        res.sendFile(path.resolve(__dirname, '../public') + '/index.html'); // load our public/index.html file
     });
 
 };

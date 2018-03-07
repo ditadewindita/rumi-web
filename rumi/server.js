@@ -48,7 +48,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(methodOverride('X-HTTP-Method-Override'));
 
-// Enable logging of all requests
 app.use(logger('dev'));
 // app.use(cookieParser());
 // app.use('/', index);
@@ -57,22 +56,22 @@ app.use(logger('dev'));
 // routes
 require('./app/routes')(app); // configure our routes
 
-// app.use(function(req, res, next) {
-//   if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
-//     jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'SUPERSECRETKEYOMG', function(err, decode) {
-//       if(err)
-//         req.user = undefined;
-//       else {
-//         req.user = decode;
-//         console.log("Encoded!");
-//       }
-//     });
-//   }
-//   else {
-//     req.user = undefined;
-//     console.log("Not correct header");
-//   }
-// });
+app.use(function(req, res, next) {
+  if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
+    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'SUPERSECRETKEYOMG', function(err, decode) {
+      if(err)
+        req.user = undefined;
+      else {
+        req.user = decode;
+        console.log("Encoded!");
+      }
+    });
+  }
+  else {
+    req.user = undefined;
+    console.log("Not correct header");
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -91,7 +90,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('./public/error');
+  res.render('error.html');
 
 });
 

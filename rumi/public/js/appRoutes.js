@@ -3,26 +3,19 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     $routeProvider
         // home page
         .when('/', {
-            templateUrl: '../index.html',
-            // resolve: resolveController('../modules/home/home.js')
+            templateUrl: '../views/index.html',
+            controller: 'MainController'
         })
 
-        // login page
+        // users page that will use the UserController
         .when('/login', {
-            templateUrl: '../modules/login/main.html',
-            resolve: resolveController('../modules/login/login.js')
+            templateUrl: '../views/login/index.html',
+            controller: 'LoginController'
         })
 
-        // register page
         .when('/register', {
-            templateUrl: '../modules/register/main.html',
-            resolve: resolveController('../modules/register/register.js')
-        })
-
-        // dashboard page (for users that are signed in)
-        .when('/dashboard', {
-            templateUrl: '../modules/dashboard/main.html',
-            resolve: resolveController('../modules/dashboard/dashboard.js')
+            templateUrl: '../views/register/index.html',
+            controller: 'RegisterController'
         });
 
     $locationProvider.html5Mode(true);
