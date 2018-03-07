@@ -78,11 +78,22 @@ module.exports = function(app) {
     // frontend routes =========================================================
     // route to handle all angular requests
     app.get('/dashboard', function(req, res) {
+      console.log(req.user);
+
       res.sendFile(path.resolve(__dirname, '../public') + '/views/dashboard/index.html')
     });
 
     app.get('/', function(req, res) {
         res.sendFile(path.resolve(__dirname, '../public') + '/index.html'); // load our public/index.html file
     });
+
+    app.get('/login', function(req, res) {
+        res.sendFile(path.resolve(__dirname, '../public') + '/index.html'); // load our public/index.html file
+    });
+
+    app.get('/register', function(req, res) {
+        res.sendFile(path.resolve(__dirname, '../public') + '/index.html'); // load our public/index.html file
+    });
+
 
 };

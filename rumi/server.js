@@ -57,6 +57,8 @@ app.use(logger('dev'));
 require('./app/routes')(app); // configure our routes
 
 app.use(function(req, res, next) {
+  console.log("Viewing request..." + req);
+
   if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
     jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'SUPERSECRETKEYOMG', function(err, decode) {
       if(err)

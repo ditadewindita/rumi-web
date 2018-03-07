@@ -32,7 +32,7 @@ app.controller('MainController', function($scope) {
     $scope.tagline = 'Never get jipped by your roommates again.';
 });
 
-app.controller('LoginController', function($scope, $window, $http, UserService) {
+app.controller('LoginController', function($scope, $location, $http, UserService) {
   var usernameField = angular.element(document.querySelector('#inputUsername'));
   var passwordField = angular.element(document.querySelector('#inputPassword'));
 
@@ -50,20 +50,25 @@ app.controller('LoginController', function($scope, $window, $http, UserService) 
       // Call the user creation function in the service and gather the response.
       // I have lots of superfluous data gathering on success/error but whatevs
         UserService.login($scope.user).then(function onSuccess(response) {
-          $scope.message = false;
+          $scope.message = 'Logged in!';
           usernameField.removeClass('is-invalid');
           passwordField.removeClass('is-invalid');
+          // sessionStorage.
 
-          $window.location.href = '/dashboard';
-
-          // window.location.href = '../views/dashboard/index.html';
-
-          // Handle success
+          // // Handle success
           // var data = response.data;
           // var status = response.status;
           // var statusText = response.statusText;
           // var headers = response.headers;
           // var config = response.config;
+
+          // $scope.output = data;
+          // $scope.output2 = headers;
+          // $http.get('/dashboard', response.data);
+          // $location.url('../dashboard');
+
+          // $window.location.href = '/dashboard';
+
       }).catch(function onError(response) {
         // Handle error
         var message = response.data.message;
@@ -110,7 +115,7 @@ app.controller('RegisterController', function($scope, UserService) {
 
       // Call the user creation function in the service and gather the response.
       UserService.create($scope.user).then(function onSuccess(response) {
-        $scope.message = false;
+        $scope.message = 'Created account!';
         emailField.removeClass('is-invalid');
         usernameField.removeClass('is-invalid');
 

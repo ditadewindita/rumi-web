@@ -4,4 +4,4 @@ app.controller('DashboardController', function($scope) {
   $scope.message = 'Welcome!';
 });
 
-angular.bootstrap(document.getElementById("App2"), ['RumiDashboard']);
+angular.bootstrap(document.getElementById("rumi_dashboard"), ['RumiDashboard']);
