@@ -3,6 +3,8 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var User = require('./models/user');
 var path = require('path');
+var config = require('./config');
+var tokenKey = config.secretKey;
 
 module.exports = function(app) {
 
@@ -14,7 +16,7 @@ module.exports = function(app) {
     app.post('/api/createUser', function(req, res) {
       console.log("Attempting to create user...");
 
-      User.findOne({ email: req.body.email }, function(err, user){
+      User.findOne({ email : req.body.email }, function(err, user){
         // If user email already exists
         if (user) {
           res.status(401).json({ code : 1, message : 'Account with that email already exists.' });
@@ -66,10 +68,24 @@ module.exports = function(app) {
               firstName : user.firstName,
               lastName : user.lastName,
               email : user.email,
-              username : user.username }, 'SUPERSECRETKEYOMG')});
+              username : user.username }, tokenKey)});
           }
         }
       });
+    });
+
+    app.get('/api/getDashboard/:token', function(req, res) {
+      console.log("Getting dashboard...");
+      console.log(req.params.token);
+
+      jwt.verify(req.params.token, tokenKey, function(err, decode) {
+        if(err)
+          console.log("Error decoding JWT");
+        else {
+          console.log(decode);
+        }
+      });
+
     });
 
     // route to handle creating goes here (app.post)
@@ -78,8 +94,6 @@ module.exports = function(app) {
     // frontend routes =========================================================
     // route to handle all angular requests
     app.get('/dashboard', function(req, res) {
-      console.log(req.user);
-
       res.sendFile(path.resolve(__dirname, '../public') + '/views/dashboard/index.html')
     });
 

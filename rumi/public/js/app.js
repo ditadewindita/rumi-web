@@ -6,8 +6,8 @@ app.factory('UserService', function($http) {
 
   return {
     // call to GET all users
-    get : function() {
-      return $http.get('/api/users');
+    getDashboard : function(token) {
+      return $http.get('/api/getDashboard/' + JSON.stringify(token));
     },
 
     // call to POST and create a new user
@@ -19,11 +19,11 @@ app.factory('UserService', function($http) {
     login : function(userData) {
       return $http.post('/api/loginUser', userData);
     },
-
-    // call to DELETE a user
-    delete : function(id) {
-      return $http.delete('/api/users/' + id);
-    }
+    //
+    // // call to DELETE a user
+    // delete : function(id) {
+    //   return $http.delete('/api/users/' + id);
+    // }
   }
 });
 
@@ -53,6 +53,10 @@ app.controller('LoginController', function($scope, $location, $http, UserService
           $scope.message = 'Logged in!';
           usernameField.removeClass('is-invalid');
           passwordField.removeClass('is-invalid');
+          var data = response.data;
+
+          UserService.getDashboard(data);
+
           // sessionStorage.
 
           // // Handle success
