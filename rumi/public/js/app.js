@@ -146,3 +146,5 @@ app.controller('RegisterController', function($scope, UserService) {
     };
   }
 });
+
+

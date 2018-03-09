@@ -66,7 +66,7 @@ module.exports = function(app) {
               firstName : user.firstName,
               lastName : user.lastName,
               email : user.email,
-              username : user.username }, 'SUPERSECRETKEYOMG')});
+              username : user.username }, 'SUPERSECRETKEYOMG')}); // LOLOLOLOLOOLOLOL
           }
         }
       });

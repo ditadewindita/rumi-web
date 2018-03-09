@@ -16,7 +16,14 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/register', {
             templateUrl: '../views/register/index.html',
             controller: 'RegisterController'
-        });
+        })
+
+        .when('/dashboard', {
+            templateUrl: '../views/dashboard/index.html',
+            controller: 'DashboardController'
+        })
+
+        ;
 
     $locationProvider.html5Mode(true);
 
