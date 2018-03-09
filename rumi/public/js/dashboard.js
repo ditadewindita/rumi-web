@@ -1,18 +1,14 @@
-angular.module('RumiDashboard', ['ui.router', 'RumiDashboard.controllers']).config(function($stateProvider, $locationProvider, $urlRouterProvider) {
-
-  $urlRouterProvider.otherwise('/dashboard');
+angular.module('RumiDashboard', ['ui.router', 'RumiDashboard.controllers', 'Rumi.services']).config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 
   $stateProvider
     .state('dashboard', {
       url : '/dashboard',
       templateUrl: '../views/dashboard/main.html',
-      params : {
-        userId : null
-      },
       controller: 'DashboardController'
     });
 
     $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('/dashboard');
 });
 
-angular.bootstrap(document.getElementById("rumi_dashboard"), ['RumiDashboard']);
+angular.bootstrap(document.getElementById('rumi_dashboard'), ['RumiDashboard']);

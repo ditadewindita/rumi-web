@@ -1,19 +1,14 @@
-angular.module('Rumi.services').service('UserService', function($http) {
+angular.module('Rumi.services').service('UserService', function($rootScope) {
 
-  return {
+  var currUser;
 
-    getDashboard : function(token) {
-      return $http.get('/api/auth/me', {
-        headers: {'x-access-token': token }
-      });
-    },
-
-    register : function(userData) {
-      return $http.post('/api/auth/register', userData);
-    },
-
-    login : function(userData) {
-      return $http.post('/api/auth/login', userData);
-    }
+  this.setUser = function(user) {
+    currUser = user;
+    $rootScope.$broadcast('userAdded');
   }
+
+  this.getUser = function() {
+    return currUser;
+  }
+
 });

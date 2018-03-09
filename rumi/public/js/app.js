@@ -1,7 +1,5 @@
 angular.module('Rumi', ['ui.router', 'Rumi.services', 'Rumi.controllers']).config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/');
-
   $stateProvider
     .state('index', {
       url : '/',
@@ -17,15 +15,8 @@ angular.module('Rumi', ['ui.router', 'Rumi.services', 'Rumi.controllers']).confi
       url : '/register',
       templateUrl: '../views/register/index.html',
       controller: 'RegisterController'
-    })
-    .state('dashboard', {
-      url : '/dashboard',
-      templateUrl: '../views/dashboard/index.html',
-      params : {
-        userId : null
-      },
-      controller: 'DashboardController'
     });
 
     $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('/');
 });

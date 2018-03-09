@@ -1,3 +1,58 @@
-<div class="row">
-  {{ tagline }}
-</div>
+<!-- side bar -->
+  <div class="sidenav">
+      <a href="/dashboard">{{ user }}</a>
+      <a href="/friends">Friends</a>
+      <a href="/transactions">Transactions</a>
+      <a href="/receipts">Receipts</a>
+      <a href="/setting">Setting</a>
+      <a href="/download">Download</a>
+  </div>
+
+  <!-- content for dash board -->
+  <div class="main" id="scrollbar">
+    <br>
+    <h4>Recent Activites</h4>
+    <div class="container recentA">
+        <table>
+          <thead>
+            <th>{{date}}</th>
+            <th class="right center">{{total}}</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                  <h5>Split with: {{lastname}}, {{firstname}}</h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <input type="button" class="widebutton center" value="{{type}}">
+    </div>
+    <br><br>
+
+    <div class="container addfriend">
+        <table>
+            <thead>
+              <th>{{date}}</th>
+              <th class="right2 center">^__^</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    <h5>Add new friend: {{lastname}}, {{firstname}}</h5>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input type="button" class="widebutton2 center" value="{{type2}}">
+    </div>
+    <br><br>
+    <div class="container recentA center">
+
+          Send food pics >____<
+
+
+    </div>
+
+
+  </div>

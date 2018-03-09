@@ -1,4 +1,4 @@
-angular.module('Rumi.controllers').controller('LoginController', function($scope, $location, $http, UserService) {
+angular.module('Rumi.controllers').controller('LoginController', function($scope, $window, AuthenticationService, UserService) {
   var usernameField = angular.element(document.querySelector('#inputUsername'));
   var passwordField = angular.element(document.querySelector('#inputPassword'));
 
@@ -15,20 +15,28 @@ angular.module('Rumi.controllers').controller('LoginController', function($scope
     $scope.logUser = function(user) {
       // Call the user creation function in the service and gather the response.
       // I have lots of superfluous data gathering on success/error but whatevs
-        UserService.login($scope.user).then(function onSuccess(response) {
+        AuthenticationService.login($scope.user).then(function onSuccess(response) {
           $scope.message = 'Logged in!';
           usernameField.removeClass('is-invalid');
           passwordField.removeClass('is-invalid');
 
           var data = response.data.token;
-          UserService.getDashboard(data).then(function onSuccess(response) {
-
-            $state.go('dashboard', { userId : response.data._id });
-
-          }, function onError(response) {
-            $scope.message = 'Can\'t route in!';
+          AuthenticationService.setUser(data).then(function success(response) {
+            UserService.setUser(response.data.username);
+            // $state.go('dashboard');
+            $window.location.href = '/dashboard';
+          }, function error(response) {
+            $scope.output = 'no';
           });
 
+          // });
+          // $location.path('./dashboard');
+
+          // var result = UserService.getUser();
+          // if(result == null)
+          //   $scope.output = 'no';
+          // else
+          //   $scope.output = result;
           // sessionStorage.
 
           // // Handle success
@@ -41,7 +49,6 @@ angular.module('Rumi.controllers').controller('LoginController', function($scope
           // $scope.output = data;
           // $scope.output2 = headers;
           // $http.get('/dashboard', response.data);
-          // $window.location.href = '/dashboard';
 
       }, function onError(response) {
         // Handle error

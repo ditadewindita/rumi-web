@@ -1,4 +1,4 @@
-angular.module('Rumi.controllers').controller('RegisterController', function($scope, UserService) {
+angular.module('Rumi.controllers').controller('RegisterController', function($scope, AuthenticationService) {
   var usernameField = angular.element(document.querySelector('#inputUsername'));
   var emailField = angular.element(document.querySelector('#inputEmail'));
 
@@ -20,7 +20,7 @@ angular.module('Rumi.controllers').controller('RegisterController', function($sc
     $scope.createUser = function(user) {
 
       // Call the user creation function in the service and gather the response.
-      UserService.register($scope.user).then(function onSuccess(response) {
+      AuthenticationService.register($scope.user).then(function onSuccess(response) {
         $scope.message = 'Created account!';
         emailField.removeClass('is-invalid');
         usernameField.removeClass('is-invalid');
