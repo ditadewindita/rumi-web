@@ -11,6 +11,7 @@ var mongoose = require('mongoose');
 // var index = require('./routes/index');
 // var users = require('./routes/users');
 // var mongo = require('mongodb');
+var authAPI = require('./app/auth');
 
 // set the port
 var port = process.env.PORT || 8080;
@@ -25,9 +26,9 @@ jsonwebtoken = require("jsonwebtoken");
 mongoose.connect(config.dbUrl);
 
 // // view engine setup
-// app.engine('html', require('ejs').renderFile);
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -53,27 +54,14 @@ app.use(logger('dev'));
 // app.use('/', index);
 // app.use('/users', users);
 
-// routes
-require('./app/routes')(app); // configure our routes
+// API routes
+app.use('/api/auth', authAPI);
+// app.use('/', routes);
 
-// app.use(function(req, res, next) {
-//   console.log("Viewing request..." + req);
-//
-//   if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
-//     jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'SUPERSECRETKEYOMG', function(err, decode) {
-//       if(err)
-//         req.user = undefined;
-//       else {
-//         req.user = decode;
-//         console.log("Encoded!");
-//       }
-//     });
-//   }
-//   else {
-//     req.user = undefined;
-//     console.log("Not correct header");
-//   }
-// });
+app.disable('etag');
+
+// Angular requests
+require('./app/routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -93,12 +81,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error.html');
-
 });
 
 // start app ===============================================
 // startup our app at http://localhost:8080
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Magic happens on port ' + port + '!');
 
 exports = module.exports = app;

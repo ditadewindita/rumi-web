@@ -19,9 +19,15 @@ angular.module('Rumi.controllers').controller('LoginController', function($scope
           $scope.message = 'Logged in!';
           usernameField.removeClass('is-invalid');
           passwordField.removeClass('is-invalid');
-          var data = response.data;
 
-          UserService.getDashboard(data);
+          var data = response.data.token;
+          UserService.getDashboard(data).then(function onSuccess(response) {
+
+            $state.go('dashboard', { userId : response.data._id });
+
+          }, function onError(response) {
+            $scope.message = 'Can\'t route in!';
+          });
 
           // sessionStorage.
 
@@ -35,11 +41,9 @@ angular.module('Rumi.controllers').controller('LoginController', function($scope
           // $scope.output = data;
           // $scope.output2 = headers;
           // $http.get('/dashboard', response.data);
-          // $location.url('../dashboard');
-
           // $window.location.href = '/dashboard';
 
-      }).catch(function onError(response) {
+      }, function onError(response) {
         // Handle error
         var message = response.data.message;
         var code = response.data.code;

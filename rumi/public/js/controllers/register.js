@@ -20,7 +20,7 @@ angular.module('Rumi.controllers').controller('RegisterController', function($sc
     $scope.createUser = function(user) {
 
       // Call the user creation function in the service and gather the response.
-      UserService.create($scope.user).then(function onSuccess(response) {
+      UserService.register($scope.user).then(function onSuccess(response) {
         $scope.message = 'Created account!';
         emailField.removeClass('is-invalid');
         usernameField.removeClass('is-invalid');

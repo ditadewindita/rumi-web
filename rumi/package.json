@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@angular/cli": "^1.7.1",
+    "@uirouter/angularjs": "^1.0.15",
     "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",

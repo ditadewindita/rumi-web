@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <base href="/">
+    <base href="/dashboard">
 
     <title>Rumi Dashboard</title>
 
@@ -13,21 +13,24 @@
     <!-- JS -->
     <script src="../../js/libs/angular/angular.min.js"></script>
     <script src="../../js/libs/angular-route/angular-route.min.js"></script>
+    <script src="../../js/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
 	  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
     <!-- ANGULAR CUSTOM -->
-    <!-- <script src="/js/controllers/MainCtrl.js"></script>
-    <script src="/js/controllers/UserCtrl.js"></script>
-    <script src="/js/services/UserService.js"></script> -->
-    <script src="../../js/dashboardRoutes.js"></script>
+
+    <!-- Controllers -->
+    <script src="../../js/dashboardControllers.js"></script>
+    <script src="../../js/controllers/dashboard/main.js"></script>
+
     <script src="../../js/dashboard.js"></script>
+
 </head>
 
 <body>
   <div ng-app="RumiDashboard" id="rumi_dashboard" class="container-fluid">
 
     <!-- ANGULAR DYNAMIC CONTENT -->
-    <div ng-view></div>
+    <ui-view></ui-view>
 
   </div>
 

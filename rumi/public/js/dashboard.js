@@ -1,7 +1,18 @@
-var app = angular.module("RumiDashboard", ['ngRoute', 'dashboardRoutes']);
+angular.module('RumiDashboard', ['ui.router', 'RumiDashboard.controllers']).config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 
-app.controller('DashboardController', function($scope) {
-  $scope.message = 'Welcome!';
+  $urlRouterProvider.otherwise('/dashboard');
+
+  $stateProvider
+    .state('dashboard', {
+      url : '/dashboard',
+      templateUrl: '../views/dashboard/main.html',
+      params : {
+        userId : null
+      },
+      controller: 'DashboardController'
+    });
+
+    $locationProvider.html5Mode(true);
 });
 
 angular.bootstrap(document.getElementById("rumi_dashboard"), ['RumiDashboard']);
