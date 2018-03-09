@@ -23,7 +23,11 @@
     "mongoose": "^5.0.5",
     "monk": "^6.0.5",
     "morgan": "~1.9.0",
+<<<<<<< HEAD
     "ngstorage": "^0.3.11",
+=======
+    "node-pre-gyp": "^0.6.39",
+>>>>>>> c92bdbbc81be5fd72e43593b26006c9b2dac0979
     "serve-favicon": "~2.4.5"
   }
 }

@@ -20,3 +20,5 @@ angular.module('Rumi', ['ui.router', 'Rumi.services', 'Rumi.controllers']).confi
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
 });
+
+

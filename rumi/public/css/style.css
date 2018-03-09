@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> c92bdbbc81be5fd72e43593b26006c9b2dac0979
 .sidenav {
   position: fixed;
   float: left;
@@ -33,7 +37,11 @@
 }
 
 .addfriend {
+<<<<<<< HEAD
   width: 80%;
+=======
+  width: 80%; 
+>>>>>>> c92bdbbc81be5fd72e43593b26006c9b2dac0979
   background-color: rgb(198, 223, 215);
 }
 
@@ -61,15 +69,25 @@
   /* width: 120%; */
   margin-left: -15px;
   padding: 15px 499px;
+<<<<<<< HEAD
 
   background-color: #59b68e;
+=======
+  
+  background-color: #59b68e; 
+>>>>>>> c92bdbbc81be5fd72e43593b26006c9b2dac0979
 }
 .widebutton2 {
   /* width: 120%; */
   margin-left: -15px;
   padding: 15px 371px;
+<<<<<<< HEAD
 
   background-color: #59b68e;
+=======
+  
+  background-color: #59b68e; 
+>>>>>>> c92bdbbc81be5fd72e43593b26006c9b2dac0979
 }
 
 div{
