@@ -29,6 +29,54 @@
   padding: 0px 15px;
 }
 
+.recentA {
+  background-color: rgb(198, 223, 215);
+}
+
+.addfriend {
+  width: 80%; 
+  background-color: rgb(198, 223, 215);
+}
+
+.right {
+    position: absolute;
+    right: 30px;
+    width: 100px;
+    background-color:  #59b68e;
+    padding: 10px;
+}
+
+.right2 {
+  position: absolute;
+  right: 134px;
+  width: 100px;
+  background-color:  #59b68e;
+  padding: 10px;
+}
+
+.center{
+  text-align: center;
+}
+
+.widebutton {
+  /* width: 120%; */
+  margin-left: -15px;
+  padding: 15px 499px;
+  
+  background-color: #59b68e; 
+}
+.widebutton2 {
+  /* width: 120%; */
+  margin-left: -15px;
+  padding: 15px 371px;
+  
+  background-color: #59b68e; 
+}
+
+div{
+  resize: both;
+}
+
 a {
   color: #59b68e;
 }
